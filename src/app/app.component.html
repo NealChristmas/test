@@ -1,0 +1,41 @@
+
+
+
+
+
+<mat-grid-list cols="12" rowHeight="100vh" class="full-width">
+  <mat-grid-tile colspan = "2" >
+    <section class="scrollable" style="padding: 8px; margin-right: 8px;">
+      <h4>基础组件:</h4>
+      <mat-card *ngFor="let draggable of draggables" [dndDraggable]="draggable.content"
+        [dndEffectAllowed]="draggable.effectAllowed" [dndDisableIf]="draggable.disable" (dndStart)="onDragStart($event)"
+        (dndCopied)="onDragged($event, 'copy')" (dndLinked)="onDragged($event, 'link')"
+        (dndMoved)="onDragged($event, 'move')" (dndCanceled)="onDragged($event, 'none')" (dndEnd)="onDragEnd($event)">
+        {{ draggable.title }}
+        <span [hidden]="!draggable.handle"> only with handle</span>
+        <span [hidden]="!draggable.disable"> DISABLED</span>
+      </mat-card>
+    </section>
+
+  </mat-grid-tile>
+  <mat-grid-tile  colspan = "8">
+    <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over"
+      [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)">
+      <cmp-container></cmp-container>
+    </section>
+  </mat-grid-tile>
+  <!-- <mat-grid-tile  colspan = "2" >
+    <div style="height: 100%;padding: 10px;"> <app-cmp-edit></app-cmp-edit></div>
+   
+  </mat-grid-tile>
+  <mat-grid-tile  colspan = "6" >
+    <section  class="json-section">
+      <pre *ngIf="lastDropEvent">{{ cmpsJson | json }}</pre>
+    </section>
+  </mat-grid-tile> -->
+  <!-- <mat-grid-tile  colspan = "6" >
+    <section  class="preview-section">
+      <pre *ngIf="lastDropEvent">{{ lastDropEvent | json }}</pre>
+    </section>
+  </mat-grid-tile> -->
+</mat-grid-list>

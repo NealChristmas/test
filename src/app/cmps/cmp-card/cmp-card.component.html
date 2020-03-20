@@ -1,0 +1,7 @@
+<div class="cmp-card" (click)= "onCardChoose($event)">
+   
+    <ng-content></ng-content>
+    <div class="mask" [ngClass]="{'active': isActive}">
+        <a href="#javascript:;" (click)="deleteItem()" >删除</a>
+    </div>
+</div>
