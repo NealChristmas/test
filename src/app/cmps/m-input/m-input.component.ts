@@ -6,15 +6,8 @@ import { ReactiveContainerService } from "../../reactive-container.service"
   styleUrls: ['./m-input.component.scss']
 })
 export class MInputComponent implements OnInit {
-  @Input() data: any;
-  constructor(public reactiveContainerService:ReactiveContainerService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-  selected(attr){
-    this.reactiveContainerService.selectComponet(this)
-  }
-  delete(){
-    this.reactiveContainerService.deleteComponent(this)
   }
 }

@@ -7,13 +7,13 @@
 
 <nz-tabset>
     <nz-tab nzTitle="字段属性">
-        <div class="empty-data" *ngIf="!data">还没有添加字段</div>
-        <div class="container full-width flex-column" *ngIf="data">
-            <mat-form-field class="full-width" *ngIf="data.id">
-                <input matInput placeholder="字段标识" [(ngModel)]="data.id" >
+        <div class="empty-data" *ngIf="!attr">还没有添加字段</div>
+        <div class="container full-width flex-column" *ngIf="attr">
+            <mat-form-field class="full-width" *ngIf="attr.id">
+                <input matInput placeholder="字段标识" [(ngModel)]="attr.id" >
             </mat-form-field>
-            <mat-form-field class="full-width" *ngIf="data.attr.title">
-                <input matInput placeholder="标题" [(ngModel)]="data.attr.title">
+            <mat-form-field class="full-width" *ngIf="attr.title">
+                <input matInput placeholder="标题" [(ngModel)]="attr.title">
             </mat-form-field>
         </div>
     </nz-tab>

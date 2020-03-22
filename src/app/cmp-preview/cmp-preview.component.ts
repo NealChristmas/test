@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy ,Renderer2} from '@angular/core';
 import { ReactiveDirective } from "../reactive.directive"
 import { ReactiveContainerService } from "../reactive-container.service"
 import  cmpConfig  from "../cmps/cmps.config"
 import { element } from 'protractor';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { config } from 'rxjs';
 @Component({
   selector: 'app-cmp-preview',
   templateUrl: './cmp-preview.component.html',
@@ -13,68 +14,42 @@ export class CmpPreviewComponent implements OnInit {
   @ViewChild(ReactiveDirective, {static: true}) cmpReactive: ReactiveDirective;
   @Input() title: string;
   @Input() subtitle: string;
+  @Input() JsonConfig:any;
   viewContainerRef:any
-  cmp
-  cmpsJson:any = [
-    {
-      id: "mat-button_1584695321603",
-      type:"mat-button",
-      attr: {
-        width: "100px",
-        title: "这是一个按钮"
-      }
-    },
-    {
-      id: "mat-input_1584695322314",
-      type:"mat-input",
-      attr: {
-        width: "100px",
-        title: "你最喜欢的食物",
-        placeholder: "默认placeholder"
-      }
-    },
-    {
-      id: "mat-slide_1584695323578",
-      type:"mat-slide",
-      attr: {
-        width: "100px"
-      }
-    }
-  ]
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private reactiveContainerService: ReactiveContainerService,
     private modal: NzModalRef,
+    private rd:Renderer2
   ) { }
 
   ngOnInit() {
-    let cmps = this.getCmps()
-    cmps.forEach(cmp=>{
-      this.loadComponent(cmp)
+    this.getConfig().forEach(config=>{
+      this.loadComponent(config)
     })
   }
-  loadComponent(cmp) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(cmp.component);
+  loadComponent(config) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(config.cmpClass);
     const viewContainerRef = this.viewContainerRef = this.cmpReactive.viewContainerRef;
     const componentRef =  viewContainerRef.createComponent(componentFactory);
+    this.rd.addClass(componentRef.location.nativeElement,"cmp-item")
+    console.log( componentRef.location.nativeElement)
     //@ts-ignore
-    componentRef.instance.data = {
-      attr:cmp.attr
-    }
+    componentRef.instance.attr = config.attr
   }
-  getCmps(){
+  getConfig(){
     let res = []
-    let cmpItem
-    this.cmpsJson.forEach((item,index,self)=>{
-      cmpConfig.forEach(element=>{
-        if(item.type === element.content.type){
-          cmpItem = item
-          
-          cmpItem.component = element.content.component
-          res.push(cmpItem)
-        }
+    if(this.JsonConfig){
+      let cmpItem
+      this.JsonConfig.forEach((item,index,self)=>{
+        cmpConfig.forEach(element=>{
+          if(item.type === element.content.type){
+            cmpItem = item 
+            res.push(cmpItem)
+          }
+        })
       })
-    })
+    }
     return res
   }
   destroyModal(): void {

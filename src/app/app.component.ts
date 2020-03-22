@@ -69,12 +69,10 @@ export class AppComponent  {
   }
 
   onDrop( event:DndDropEvent ) {
+    console.log("drop",event)
     this.lastDropEvent = event;
-    this.reactiveContainerService.push(this.lastDropEvent)
-    this.cmpsJson = this.reactiveContainerService.collectInstanceConfiguration()
-    // this.reactiveContainerService.push(this.lastDropEvent.)
+    this.reactiveContainerService.notifyCmpContainer(this.lastDropEvent)
   }
   onDragover(e:any){
-    // console.log("dragover",e)
   }
 }

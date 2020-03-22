@@ -35,11 +35,8 @@ export class ContainerComponent implements OnInit {
    }
 
   ngOnInit() {
-    // let res = this.CardService.createCard(MButtonComponent)
-    // console.log(res)
-    this.loadComponent2(CmpCardComponent)
     this.reactiveContainerService.addcmp.subscribe((cmp)=>{
-      this.loadComponent2(cmp)
+      this.loadComponent(cmp)
     })
     this.reactiveContainerService.deletecmp.subscribe((viewRef)=>{
       this.deleteComponent(viewRef)
@@ -48,42 +45,34 @@ export class ContainerComponent implements OnInit {
   }
 
   loadComponent(cmp) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(cmp.component);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CmpCardComponent);
     const viewContainerRef = this.viewContainerRef = this.cmpReactive.viewContainerRef;
-    console.log("viewContainerRef1",viewContainerRef)
     const componentRef =  viewContainerRef.createComponent(componentFactory);
-    this.reactiveContainerService.cmpsInstance.push(componentRef.instance)
     //@ts-ignore
     componentRef.instance.data = {
       id:cmp.id,
-      attr:cmp.attr,
+      type:cmp.type,
+      attr:{
+        id:cmp.id,
+        ...cmp.attr
+      },
       //@ts-ignore
-      viewRef:componentRef._viewRef
+      viewRef:componentRef._viewRef,
+      cmpClass:cmp.component
     }
-    // this.addMask()
-    console.log("cmpsInstance",this.reactiveContainerService.cmpsInstance)
-    // console.log("componentRef.instance",componentRef.instance)
+    this.reactiveContainerService.cardsInstances.push(componentRef.instance)
   }
-  loadComponent2(cmp) {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(cmp);
-    const viewContainerRef = this.viewContainerRef = this.cmpReactive.viewContainerRef;
-    console.log("viewContainerRef1",viewContainerRef)
-    const componentRef =  viewContainerRef.createComponent(componentFactory);
-    //@ts-ignore
-    componentRef.instance.data = MButtonComponent
-    // console.log("componentRef.instance",componentRef.instance)
-  }
-  deleteComponent(cmpInstance){
-    let viewIndex =  this.viewContainerRef.indexOf(cmpInstance.data.viewRef)
+  deleteComponent(cmpData){
+    let viewIndex =  this.viewContainerRef.indexOf(cmpData.viewRef)
     this.viewContainerRef.remove(viewIndex)
 
-    this.reactiveContainerService.cmpsInstance.forEach((instance,index,self)=>{
-      if(instance.data.id == cmpInstance.data.id){
+    this.reactiveContainerService.cardsInstances.forEach((instance,index,self)=>{
+      if(instance.data.id == cmpData.id){
         self.splice(index,1)
       }
     })
   }
-  
+  //生成json预览
   createComponentModal(): void {
     const modal = this.modalService.create({
       nzTitle: 'Modal Title',
@@ -102,13 +91,15 @@ export class ContainerComponent implements OnInit {
       ]
     });
   }
+  //生成组件预览
   createPreviewModal():void{
     const modal = this.modalService.create({
       nzTitle: 'Modal Title',
       nzContent: CmpPreviewComponent,
       nzComponentParams: {
         title: 'title in component',
-        subtitle: 'component sub title，will be changed after 2 sec'
+        subtitle: 'component sub title，will be changed after 2 sec',
+        JsonConfig:this.reactiveContainerService.cmpJsonConfig
       },
       nzFooter: [
         {

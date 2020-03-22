@@ -7,7 +7,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./cmp-edit.component.scss']
 })
 export class CmpEditComponent implements OnInit {
-  data:any
+  attr:any
   validateForm: FormGroup;
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -39,8 +39,8 @@ export class CmpEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.reactiveContainerService.updateData.subscribe(instance=>{
-      this.updateData(instance)
+    this.reactiveContainerService.updateData.subscribe(attr=>{
+      this.updateData(attr)
     })
     this.validateForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
@@ -54,8 +54,8 @@ export class CmpEditComponent implements OnInit {
       agree: [false]
     });
   }
-  updateData(instance){
-    this.data = instance.data
+  updateData(attr){
+    this.attr = attr
     // this.data = this.reactiveContainerService.selectCmpInstance && this.reactiveContainerService.selectCmpInstance.data
     // this.id = this.reactiveContainerService.selectCmpInstance&&this.reactiveContainerService.selectCmpInstance.id
   }

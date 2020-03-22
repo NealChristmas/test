@@ -1,7 +1,8 @@
 import { MInputComponent } from "./m-input/m-input.component"
 import { MButtonComponent } from "./m-button/m-button.component"
-import { MDateComponent } from "./m-date/m-date.component"
 import { MSlideComponent } from "./m-slide/m-slide.component"
+import { CmpCardComponent } from "./cmp-card/cmp-card.component"
+import { MDateComponent } from "./m-date/m-date.component"
 let cmpConfig = [
     {
       content: {
@@ -16,6 +17,18 @@ let cmpConfig = [
       disable: false,
       handle: false,
       title:"按钮"
+    },
+    {
+      content: {
+        type:"antd-date_picker",
+        component:MDateComponent,
+        attr:{
+        }
+      },
+      effectAllowed: "move",
+      disable: false,
+      handle: false,
+      title:"时间选择器"
     },
     {
       content: {

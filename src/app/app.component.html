@@ -19,16 +19,16 @@
 
   </mat-grid-tile>
   <mat-grid-tile  colspan = "8">
-    <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over"
-      [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)">
+    <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over" dndEffectAllowed="copyMove"
+      [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)"   [dndHorizontal]="true">
       <cmp-container></cmp-container>
     </section>
   </mat-grid-tile>
-  <!-- <mat-grid-tile  colspan = "2" >
+  <mat-grid-tile  colspan = "2" >
     <div style="height: 100%;padding: 10px;"> <app-cmp-edit></app-cmp-edit></div>
    
   </mat-grid-tile>
-  <mat-grid-tile  colspan = "6" >
+  <!-- <mat-grid-tile  colspan = "6" >
     <section  class="json-section">
       <pre *ngIf="lastDropEvent">{{ cmpsJson | json }}</pre>
     </section>
