@@ -31,7 +31,8 @@ import { MSlideComponent } from './cmps/m-slide/m-slide.component';
 import { CmpCardComponent } from './cmps/cmp-card/cmp-card.component';
 import { CmpEditComponent } from './cmp-edit/cmp-edit.component';
 import { CmpJsonComponent } from './cmp-json/cmp-json.component';
-import { CmpPreviewComponent } from './cmp-preview/cmp-preview.component'
+import { CmpPreviewComponent } from './cmp-preview/cmp-preview.component';
+import { CardDirective } from './cmps/card.directive'
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { CmpPreviewComponent } from './cmp-preview/cmp-preview.component'
     CmpEditComponent,
     CmpJsonComponent,
     CmpPreviewComponent,
+    CardDirective,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,7 @@ import { CmpPreviewComponent } from './cmp-preview/cmp-preview.component'
     
   ],
   providers: [],
-  entryComponents: [ MButtonComponent , MInputComponent , MSlideComponent , CmpJsonComponent ,CmpPreviewComponent],
+  entryComponents: [ MButtonComponent , MInputComponent , MSlideComponent , CmpJsonComponent ,CmpPreviewComponent ,CmpCardComponent],
   bootstrap: [AppComponent],
  
 })

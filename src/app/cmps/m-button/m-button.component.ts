@@ -7,7 +7,11 @@ import { CmpCardComponent } from "../cmp-card/cmp-card.component"
   styleUrls: ['./m-button.component.scss']
 })
 export class MButtonComponent implements OnInit {
-  @Input() data: any;
+  @Input() data: any ={
+    attr:{
+      title:"123",
+    }
+  };
   constructor(
     public reactiveContainerService:ReactiveContainerService,
     // @Host() private parent: CmpCardComponent

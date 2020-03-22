@@ -2,13 +2,17 @@ import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestro
 
 import { ReactiveDirective } from "../reactive.directive"
 import { ReactiveContainerService } from "../reactive-container.service"
+import { CardService } from "../cmps/card.service"
+
+import { MButtonComponent} from "../cmps/m-button/m-button.component"
+import { CmpCardComponent } from "../cmps/cmp-card/cmp-card.component"
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 
 import { CmpJsonComponent } from "../cmp-json/cmp-json.component"
 import { CmpPreviewComponent } from "../cmp-preview/cmp-preview.component"
 import { element } from 'protractor';
 // import { AdComponent } from './ad.component';
-
+// import * as $ from 'jquery';
 @Component({
   selector: 'cmp-container',
   templateUrl: './container.component.html',
@@ -24,14 +28,18 @@ export class ContainerComponent implements OnInit {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private reactiveContainerService: ReactiveContainerService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private CardService: CardService
     ) {
       
    }
 
   ngOnInit() {
+    // let res = this.CardService.createCard(MButtonComponent)
+    // console.log(res)
+    this.loadComponent2(CmpCardComponent)
     this.reactiveContainerService.addcmp.subscribe((cmp)=>{
-      this.loadComponent(cmp)
+      this.loadComponent2(cmp)
     })
     this.reactiveContainerService.deletecmp.subscribe((viewRef)=>{
       this.deleteComponent(viewRef)
@@ -42,6 +50,7 @@ export class ContainerComponent implements OnInit {
   loadComponent(cmp) {
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(cmp.component);
     const viewContainerRef = this.viewContainerRef = this.cmpReactive.viewContainerRef;
+    console.log("viewContainerRef1",viewContainerRef)
     const componentRef =  viewContainerRef.createComponent(componentFactory);
     this.reactiveContainerService.cmpsInstance.push(componentRef.instance)
     //@ts-ignore
@@ -51,8 +60,17 @@ export class ContainerComponent implements OnInit {
       //@ts-ignore
       viewRef:componentRef._viewRef
     }
-    this.addMask()
+    // this.addMask()
     console.log("cmpsInstance",this.reactiveContainerService.cmpsInstance)
+    // console.log("componentRef.instance",componentRef.instance)
+  }
+  loadComponent2(cmp) {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(cmp);
+    const viewContainerRef = this.viewContainerRef = this.cmpReactive.viewContainerRef;
+    console.log("viewContainerRef1",viewContainerRef)
+    const componentRef =  viewContainerRef.createComponent(componentFactory);
+    //@ts-ignore
+    componentRef.instance.data = MButtonComponent
     // console.log("componentRef.instance",componentRef.instance)
   }
   deleteComponent(cmpInstance){
@@ -65,6 +83,7 @@ export class ContainerComponent implements OnInit {
       }
     })
   }
+  
   createComponentModal(): void {
     const modal = this.modalService.create({
       nzTitle: 'Modal Title',
@@ -101,13 +120,26 @@ export class ContainerComponent implements OnInit {
       ]
     });
   }
-  addMask(){
-    let elements = document.querySelectorAll("nz-button")
-    let tag = document.createElement("div");
-    tag.innerHTML = "zhuchunjie"
-    debugger
-    Array.from(elements).forEach(item=>{
-      item.appendChild(tag)
-    })
+  // addMask(){
+  //   let elements = document.querySelectorAll("[reactive_cmp]")
+  //   Array.from(elements).forEach(item=>{
+  //     if(!$(item).parent().hasClass("cmp-card")){
+  //       $(item)
+  //         .wrap("<div class='cmp-card'></div>")
+  //         .parent()
+  //         .append(`<div class="mask" ><a href="#javascript:;" >删除</a></div>`)
+  //     }   
+  //   })
+  // }
+  createNode(txt) {
+      
+      const template = `<div class='child'>${txt}</div>`;
+      let tempNode = document.createElement('div');
+      tempNode.innerHTML = template;
+      return tempNode.firstChild;
+  }
+  handleClick(e:Event){
+    e.target
+    console.log(e)
   }
 }

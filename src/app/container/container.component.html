@@ -5,6 +5,9 @@
         <button nz-button nzType="link" (click)="createPreviewModal()">预览</button>
         <button nz-button nzType="link" (click)="createComponentModal()">生成json</button>
     </div>
-    <ng-template cmpReactive></ng-template>
+    <div (click)= "handleClick($event)">
+        <ng-template cmpReactive></ng-template>
+    </div>
+   
     <!-- <button mat-flat-button color="primary">点击预览</button> -->
 </div>
