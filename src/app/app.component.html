@@ -19,10 +19,14 @@
 
   </mat-grid-tile>
   <mat-grid-tile  colspan = "8">
-    <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over" dndEffectAllowed="copyMove"
+    <!-- <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over" dndEffectAllowed="copyMove"
       [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)"   [dndHorizontal]="true">
       <cmp-container></cmp-container>
-    </section>
+    </section> -->
+    <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over" dndEffectAllowed="copyMove"
+    [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)"   [dndHorizontal]="true" >
+    <cmp-container></cmp-container>
+  </section>
   </mat-grid-tile>
   <mat-grid-tile  colspan = "2" >
     <div style="height: 100%;padding: 10px;"> <app-cmp-edit></app-cmp-edit></div>

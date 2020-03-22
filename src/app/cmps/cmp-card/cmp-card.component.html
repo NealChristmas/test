@@ -1,15 +1,6 @@
 <div
   class="cmp-card"
   (click)="onCardChoose($event)"
-  [dndDraggable]="draggable.content"
-  [dndEffectAllowed]="draggable.effectAllowed"
-  [dndDisableIf]="draggable.disable"
-  (dndStart)="onDragStart($event)"
-  (dndCopied)="onDragged($event, 'copy')"
-  (dndLinked)="onDragged($event, 'link')"
-  (dndMoved)="onDragged($event, 'move')"
-  (dndCanceled)="onDragged($event, 'none')"
-  (dndEnd)="onDragEnd($event)"
 >
   <!-- <ng-content></ng-content> -->
   <ng-template cmpCard></ng-template>

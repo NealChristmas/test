@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DndModule } from "ngx-drag-drop";
+import { DragulaModule } from 'ng2-dragula';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgZorroAntdModule } from "ng-zorro-antd";
 
@@ -65,7 +66,8 @@ import { MDateComponent } from "./cmps/m-date/m-date.component";
     MatDatepickerModule,
     MatGridListModule,
     NgZorroAntdModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragulaModule.forRoot()
   ],
   providers: [],
   entryComponents: [
