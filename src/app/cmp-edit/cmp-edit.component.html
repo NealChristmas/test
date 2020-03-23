@@ -5,126 +5,80 @@
     </mat-form-field>
 </form> -->
 
-<nz-tabset>
-    <nz-tab nzTitle="字段属性">
+<nz-tabset class="full-width">
+    <nz-tab nzTitle="字段属性" class="full-width">
         <div class="empty-data" *ngIf="!attr">还没有添加字段</div>
-        <div class="container full-width flex-column" *ngIf="attr">
+        <!-- <div class="container full-width flex-column" *ngIf="attr">
             <mat-form-field class="full-width" *ngIf="attr.id">
                 <input matInput placeholder="字段标识" [(ngModel)]="attr.id" >
             </mat-form-field>
-            <mat-form-field class="full-width" *ngIf="attr.title">
+            <mat-form-field class="full-width" *ngIf="attr.title!=undefined">
                 <input matInput placeholder="标题" [(ngModel)]="attr.title">
             </mat-form-field>
-        </div>
+        </div> -->
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" *ngIf="attr">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
+              <span>
+                  字段标识
+              </span>
+            </nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Please input your nickname!">
+              <input matInput placeholder="字段标识" [(ngModel)]="attr.id" formControlName="id">
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
+              <span>
+                字段名称
+              </span>
+            </nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Please input your nickname!">
+              <input matInput placeholder="字段名称" [(ngModel)]="attr.title" formControlName="title">
+            </nz-form-control>
+          </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
+            <span>
+              字段值
+            </span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Please input your nickname!">
+            <input matInput placeholder="字段值" [(ngModel)]="attr.value" formControlName="value" >
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
+            <span>
+              所占行比例
+            </span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+            <!-- <input matInput placeholder="字段值" [(ngModel)]="attr.lineProportion" formControlName="lineProportion" > -->
+            <nz-select [(ngModel)]="attr.lineProportion" nzAllowClear nzPlaceHolder="Choose" formControlName="lineProportion">
+              <nz-option nzValue="100%" nzLabel="1"></nz-option>
+              <nz-option nzValue="50%" nzLabel="1/2"></nz-option>
+              <nz-option nzValue="33.33%" nzLabel="1/3"></nz-option>
+              <nz-option nzValue="16.8%" nzLabel="1/8"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
     </nz-tab>
-    <nz-tab nzTitle="表单属性">
+    <!-- <nz-tab nzTitle="表单属性" class="full-width">
         <div class="empty-data" *ngIf="!data">还没有添加字段</div>
         <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
             <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-                <input nz-input formControlName="email" id="email" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
-                <input
-                  nz-input
-                  type="password"
-                  id="password"
-                  formControlName="password"
-                  (ngModelChange)="updateConfirmValidator()"
-                />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-                <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
-                <ng-template #errorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')">
-                    Please confirm your password!
-                  </ng-container>
-                  <ng-container *ngIf="control.hasError('confirm')">
-                    Two passwords that you enter is inconsistent!
-                  </ng-container>
-                </ng-template>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+              <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
                 <span>
-                  Nickname
-                  <i
-                    nz-icon
-                    nz-tooltip
-                    nzTitle="What do you want other to call you"
-                    nzType="question-circle"
-                    nzTheme="outline"
-                  ></i>
+                    对齐方式
                 </span>
               </nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
                 <input nz-input id="nickname" formControlName="nickname" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                [nzValidateStatus]="validateForm.controls['phoneNumber']"
-                nzErrorTip="Please input your phone number!"
-              >
-                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-                  <ng-template #addOnBeforeTemplate>
-                    <nz-select formControlName="phoneNumberPrefix" class="phone-select">
-                      <nz-option nzLabel="+86" nzValue="+86"></nz-option>
-                      <nz-option nzLabel="+87" nzValue="+87"></nz-option>
-                    </nz-select>
-                  </ng-template>
-                  <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
-                </nz-input-group>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
-                <input nz-input id="website" formControlName="website" placeholder="website" />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="captcha" nzRequired>Captcha</nz-form-label>
-              <nz-form-control
-                [nzSm]="14"
-                [nzXs]="24"
-                nzErrorTip="Please input the captcha you got!"
-                nzExtra="We must make sure that your are a human."
-              >
-                <div nz-row [nzGutter]="8">
-                  <div nz-col [nzSpan]="12">
-                    <input nz-input formControlName="captcha" id="captcha" />
-                  </div>
-                  <div nz-col [nzSpan]="12">
-                    <button nz-button (click)="getCaptcha($event)">Get captcha</button>
-                  </div>
-                </div>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item nz-row class="register-area">
-              <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                <label nz-checkbox formControlName="agree">
-                  <span>I have read the <a>agreement</a></span>
-                </label>
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item nz-row class="register-area">
-              <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                <button nz-button nzType="primary">Register</button>
-              </nz-form-control>
-            </nz-form-item>
           </form>
-    </nz-tab>
+    </nz-tab> -->
    
 </nz-tabset>

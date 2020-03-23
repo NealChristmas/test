@@ -5,7 +5,9 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MButtonComponent } from "./cmps/m-button/m-button.component"
 import { MInputComponent } from "./cmps/m-input/m-input.component"
 import { ReactiveContainerService } from "./reactive-container.service"
+import { DragulaService } from 'ng2-dragula';
 import cmpConfig  from "./cmps/cmps.config"
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -13,7 +15,7 @@ import cmpConfig  from "./cmps/cmps.config"
 })
 export class AppComponent  {
   draggables = cmpConfig
-  
+  subs = new Subscription();
   public cmpsJson:any
   public dropzoneEnabled:boolean = true;
   public lastDropEvent:DndDropEvent | null = null;
@@ -22,8 +24,11 @@ export class AppComponent  {
   private currentDragEffectMsg:string;
   constructor( 
     private snackBarService:MatSnackBar,
-    private reactiveContainerService:ReactiveContainerService 
+    private reactiveContainerService:ReactiveContainerService ,
+    private dragulaService: DragulaService,
     ) {
+  }
+  ngOnInit(): void {
   }
   dragImageOffsetRight:DndDragImageOffsetFunction = ( event:DragEvent, dragImage:Element ) => {
 
@@ -69,7 +74,6 @@ export class AppComponent  {
   }
 
   onDrop( event:DndDropEvent ) {
-    console.log("drop",event)
     this.lastDropEvent = event;
     this.reactiveContainerService.notifyCmpContainer(this.lastDropEvent)
   }

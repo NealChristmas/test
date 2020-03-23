@@ -2,9 +2,7 @@ import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestro
 import { ReactiveDirective } from "../reactive.directive"
 import { ReactiveContainerService } from "../reactive-container.service"
 import  cmpConfig  from "../cmps/cmps.config"
-import { element } from 'protractor';
-import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
-import { config } from 'rxjs';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal'
 @Component({
   selector: 'app-cmp-preview',
   templateUrl: './cmp-preview.component.html',
@@ -18,7 +16,6 @@ export class CmpPreviewComponent implements OnInit {
   viewContainerRef:any
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
-    private reactiveContainerService: ReactiveContainerService,
     private modal: NzModalRef,
     private rd:Renderer2
   ) { }
@@ -33,11 +30,12 @@ export class CmpPreviewComponent implements OnInit {
     const viewContainerRef = this.viewContainerRef = this.cmpReactive.viewContainerRef;
     const componentRef =  viewContainerRef.createComponent(componentFactory);
     this.rd.addClass(componentRef.location.nativeElement,"cmp-item")
-    console.log( componentRef.location.nativeElement)
+    this.rd.setStyle(componentRef.location.nativeElement,"width",config.attr.lineProportion)
     //@ts-ignore
     componentRef.instance.attr = config.attr
   }
   getConfig(){
+
     let res = []
     if(this.JsonConfig){
       let cmpItem
@@ -45,6 +43,9 @@ export class CmpPreviewComponent implements OnInit {
         cmpConfig.forEach(element=>{
           if(item.type === element.content.type){
             cmpItem = item 
+            if(!cmpItem.cmpClass){
+              cmpItem.cmpClass = element.content.component
+            }
             res.push(cmpItem)
           }
         })

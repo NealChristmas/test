@@ -1,13 +1,11 @@
 
-<div class="cmp-container" #cmpContainer>
+<div class="cmp-container" >
     <div class="header">
-        <!-- <button nz-button nzType="link">导入json</button> -->
         <button nz-button nzType="link" (click)="createPreviewModal()">预览</button>
         <button nz-button nzType="link" (click)="createComponentModal()">生成json</button>
+        <button nz-button nzType="link" (click)="createInputModal()">导入json</button>
     </div>
-    <div (click)= "handleClick($event)" dragula="VAMPIRES">
+    <div (click)= "handleClick($event)" dragula="CARD"  [(dragulaModel)]="reactiveContainerService.cmpJsonConfig" class="tpl-container" >
         <ng-template cmpReactive></ng-template>
     </div>
-   
-    <!-- <button mat-flat-button color="primary">点击预览</button> -->
 </div>

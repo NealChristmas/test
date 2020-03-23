@@ -2,9 +2,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "./assets/ng-zorro-antd.min.css";
 @import "./assets/dragula.css";
-.cmp-item{
-    margin:10px 0;
-}
+// .cmp-item{
+//     margin:10px 0;
+// }
 .full-width {
     width: 100%;
     flex-grow: 1;
@@ -23,7 +23,6 @@
     outline-offset: 0px;
 }
 .cmp-card{
-    width: 100%;
     margin:2px auto;
     min-height: 40px;
     position: relative;
@@ -47,5 +46,15 @@
     .active{
         outline: 2px solid #409EFF;
         border: 1px solid #409EFF;
+    }
+}
+.ant-modal{
+    min-width: 800px;
+}
+.ant-form-item-children{
+    display: inline-block;
+    width: 100%;
+    input{
+        width: 100%;
     }
 }

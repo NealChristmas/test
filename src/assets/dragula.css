@@ -7,6 +7,7 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
     filter: alpha(opacity=80);
     pointer-events: none;
+    
   }
   /* high-performance display:none; helper */
   .gu-hide {

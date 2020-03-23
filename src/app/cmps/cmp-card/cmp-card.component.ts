@@ -1,4 +1,4 @@
-import { Component, OnInit , EventEmitter ,Output,ViewChild ,ComponentFactoryResolver,Input} from '@angular/core';
+import { Component, OnInit , EventEmitter ,Output,ViewChild ,ComponentFactoryResolver,Input,Renderer2} from '@angular/core';
 import { ReactiveContainerService } from "../../reactive-container.service"
 import { CardDirective } from "../card.directive"
 import { MButtonComponent } from "../m-button/m-button.component"
@@ -9,29 +9,16 @@ import { DndDropEvent } from 'ngx-drag-drop';
   styleUrls: ['./cmp-card.component.scss']
 })
 export class CmpCardComponent implements OnInit {
-  @Output() choosed: EventEmitter<any> = new EventEmitter();
   @ViewChild(CardDirective, {static: true}) cardReactive: CardDirective;
   @Input() data:any
   public isActive:boolean = false
   public viewContainerRef:any
-  
-  draggable={
-    content: {
-      type:"mat-button",
-      component:MButtonComponent,
-      attr:{
-        width:"100px",
-        title:"这是一个按钮"
-      }
-    },
-    effectAllowed: "move",
-    disable: false,
-    handle: false,
-    title:"按钮"
-  }
+  public width:string
+  // public attr:any
   constructor(
     public reactiveContainerService:ReactiveContainerService,
     private componentFactoryResolver: ComponentFactoryResolver,
+    private rd:Renderer2
     ) { }
 
   ngOnInit() {
@@ -39,45 +26,40 @@ export class CmpCardComponent implements OnInit {
   }
   onCardChoose(e:any){
     this.reactiveContainerService.selectComponet(this.data.attr)
-    return 
-    this.choosed.emit()
-    this.isActive = true
   }
   deleteItem(){
     this.reactiveContainerService.deleteComponent(this.data)
   }
   loadComponent() {
-    console.log(this.data)
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.data.cmpClass);
     const viewContainerRef = this.viewContainerRef = this.cardReactive.viewContainerRef;
     const componentRef =  viewContainerRef.createComponent(componentFactory);
-    
+    let nativeElement = this.viewContainerRef.element.nativeElement
+    let parentNode = this.rd.parentNode(this.rd.parentNode(nativeElement))
+    this.rd.setStyle(parentNode,"width",this.data.attr.lineProportion)
+    let _attr = Object.assign({},this.data.attr)
+    this.width = this.data.attr.lineProportion
+    let that = this
+    Object.defineProperties(this.data.attr,{
+      "lineProportion":{
+        get(){
+          return _attr.lineProportion
+        },
+        set(value){
+          _attr.lineProportion = value
+          that.rd.setStyle(parentNode,"width",value)
+          // that.width = value
+          // this.rd.setStyle(parentNode,"width",this.data.attr.lineProportion)
+        }
+      }
+     
+    })
+    console.log(this.data.attr.lineProportion)
     //@ts-ignore
     componentRef.instance.attr = this.data.attr
-    let config = this.data
+    let config = Object.assign({},this.data)
     delete config.id
     delete config.viewRef
     this.reactiveContainerService.pushToCmpJsonConfig(config)
-  }
-  onDragStart( event:DragEvent ) {
-
-  
-  }
-
-  onDragged( $event:DragEvent, effect:string ) {
-
-  
-  }
-
-  onDragEnd( event:DragEvent ) {
-
-   
-  }
-
-  onDrop( event:DndDropEvent ) {
-   
-  }
-  onDragover(e:any){
-    console.log("dragover",e)
   }
 }

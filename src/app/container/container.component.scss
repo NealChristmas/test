@@ -9,4 +9,9 @@
         text-align: right;
         background: #ffffff;
     }
+    .tpl-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }

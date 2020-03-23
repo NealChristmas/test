@@ -1,10 +1,5 @@
-
-
-
-
-
 <mat-grid-list cols="12" rowHeight="100vh" class="full-width">
-  <mat-grid-tile colspan = "2" >
+  <mat-grid-tile colspan="2">
     <section class="scrollable" style="padding: 8px; margin-right: 8px;">
       <h4>基础组件:</h4>
       <mat-card *ngFor="let draggable of draggables" [dndDraggable]="draggable.content"
@@ -15,22 +10,35 @@
         <span [hidden]="!draggable.handle"> only with handle</span>
         <span [hidden]="!draggable.disable"> DISABLED</span>
       </mat-card>
+      <!-- <div dragula="CMP" [(dragulaModel)]="draggables">
+        <mat-card *ngFor="let draggable of draggables">
+          {{ draggable.title }}
+        </mat-card>
+      </div> -->
     </section>
-
   </mat-grid-tile>
-  <mat-grid-tile  colspan = "8">
-    <!-- <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over" dndEffectAllowed="copyMove"
-      [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)"   [dndHorizontal]="true">
+  <mat-grid-tile colspan="7">
+    <section
+      class="my-dropzone scrollable preview"
+      dndDropzone
+      dndDragoverClass="custom-drag-over"
+      dndEffectAllowed="copyMove"
+      [dndDisableIf]="!dropzoneEnabled"
+      (dndDrop)="onDrop($event)"
+      [dndHorizontal]="true"
+    >
       <cmp-container></cmp-container>
-    </section> -->
-    <section class="my-dropzone scrollable preview" dndDropzone dndDragoverClass="custom-drag-over" dndEffectAllowed="copyMove"
-    [dndDisableIf]="!dropzoneEnabled" (dndDrop)="onDrop($event)"   [dndHorizontal]="true" >
+    </section>
+    <!-- <section
+    class="my-dropzone scrollable preview"
+     [(dragulaModel)]="cmps"
+    dragula="CMP"
+  >
     <cmp-container></cmp-container>
-  </section>
+  </section> -->
   </mat-grid-tile>
-  <mat-grid-tile  colspan = "2" >
-    <div style="height: 100%;padding: 10px;"> <app-cmp-edit></app-cmp-edit></div>
-   
+  <mat-grid-tile colspan="3">
+    <div style="height: 100%;padding: 10px; width: 100%;"><app-cmp-edit></app-cmp-edit></div>
   </mat-grid-tile>
   <!-- <mat-grid-tile  colspan = "6" >
     <section  class="json-section">

@@ -19,7 +19,6 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { ContainerComponent } from "./container/container.component";
 import { ReactiveDirective } from "./reactive.directive";
-import { ReactiveCmpComponent } from "./reactive-cmp/reactive-cmp.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatGridListModule } from "@angular/material/grid-list";
 
@@ -32,12 +31,14 @@ import { CmpJsonComponent } from "./cmp-json/cmp-json.component";
 import { CmpPreviewComponent } from "./cmp-preview/cmp-preview.component";
 import { CardDirective } from "./cmps/card.directive";
 import { MDateComponent } from "./cmps/m-date/m-date.component";
+import { MSelectComponent } from './cmps/m-select/m-select.component';
+import { CmpInputAreaComponent } from './cmp-input-area/cmp-input-area.component';
+import { MHeadingComponent } from './cmps/m-heading/m-heading.component';
 @NgModule({
   declarations: [
     AppComponent,
     ContainerComponent,
     ReactiveDirective,
-    ReactiveCmpComponent,
     MButtonComponent,
     MInputComponent,
     MSlideComponent,
@@ -46,7 +47,10 @@ import { MDateComponent } from "./cmps/m-date/m-date.component";
     CmpJsonComponent,
     CmpPreviewComponent,
     CardDirective,
-    MDateComponent
+    MDateComponent,
+    MSelectComponent,
+    CmpInputAreaComponent,
+    MHeadingComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,9 @@ import { MDateComponent } from "./cmps/m-date/m-date.component";
     CmpJsonComponent,
     CmpPreviewComponent,
     CmpCardComponent,
+    MSelectComponent,
+    CmpInputAreaComponent,
+    MHeadingComponent
   ],
   bootstrap: [AppComponent]
 })

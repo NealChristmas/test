@@ -43,15 +43,19 @@ export class CmpEditComponent implements OnInit {
       this.updateData(attr)
     })
     this.validateForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      agree: [false]
+      // email: [null, [Validators.email, Validators.required]],
+      // password: [null, [Validators.required]],
+      // checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      // nickname: [null, [Validators.required]],
+      // phoneNumberPrefix: ['+86'],
+      // phoneNumber: [null, [Validators.required]],
+      // website: [null, [Validators.required]],
+      // captcha: [null, [Validators.required]],
+      agree: [false],
+      id:[],
+      title:[],
+      value:[],
+      lineProportion:[]
     });
   }
   updateData(attr){

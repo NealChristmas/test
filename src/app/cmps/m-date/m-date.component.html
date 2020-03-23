@@ -1,1 +1,11 @@
-<nz-date-picker nzSize="default"></nz-date-picker>
+
+<nz-form-item>
+    <nz-form-label [nzSm]="6"  [nzMd]="4" [nzXs]="24" nzFor="datepicker" nzRequired>
+      <span>
+          {{attr.title}}
+      </span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="Please input your nickname!">
+      <nz-date-picker nzSize="default" id="datepicker"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>

@@ -2,4 +2,14 @@
 <!-- <app-cmp-card (choosed) = "selected()" (delete) = "delete()">
    
 </app-cmp-card> -->
-<button nz-button  [nzType]="attr.type||'primary'">{{attr.title}}</button>
+
+<nz-form-item>
+    <nz-form-label [nzSm]="6"  [nzMd]="4" [nzXs]="24" nzFor="nickname" nzRequired>
+      <span>
+          {{attr.title}}
+      </span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="Please input your nickname!">
+        <button nz-button  [nzType]="attr.type||'primary'">{{attr.value}}</button>
+    </nz-form-control>
+  </nz-form-item>
