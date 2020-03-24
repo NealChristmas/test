@@ -1,4 +1,4 @@
-import {Directive, Input, ElementRef, Renderer2,SimpleChanges} from "@angular/core";
+import {Directive, Input, ElementRef, Renderer2 } from "@angular/core";
 import { CmpsService } from "./cmps.service"
 @Directive({
   selector: '[appInput]'

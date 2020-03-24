@@ -46,12 +46,11 @@ export class ReactiveContainerService {
   deleteComponent(cmpInstance) {
     this.deletecmp.emit(cmpInstance)
   }
+  //通知编辑组件更新属性
   selectComponet(attr) {
     this.updateData.emit(attr)
   }
-  pushToCmpJsonConfig(config) {
-    this.cmpJsonConfig.push(config)
-  }
+  //导入json的时候重载container
   reLoadContainer(configs){
     this.cmpJsonConfig = configs
     this.reload.emit()
@@ -61,6 +60,9 @@ export class ReactiveContainerService {
       }) 
     })
     
+  }
+  pushToCmpJsonConfig(config) {
+    this.cmpJsonConfig.push(config)
   }
   collectInstanceConfiguration = () => this.cmpJsonConfig
 }

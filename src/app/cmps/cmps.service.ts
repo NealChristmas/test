@@ -1,5 +1,4 @@
 import { Injectable ,Output ,EventEmitter} from '@angular/core';
-import cmpConfig from "./cmps.config"
 
 @Injectable({
   providedIn: 'root'

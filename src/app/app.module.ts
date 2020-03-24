@@ -1,54 +1,52 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule, MinLengthValidator } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import zh from '@angular/common/locales/zh';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(zh);
+
+//thirdparty
 import { DndModule } from "ngx-drag-drop";
 import { DragulaModule } from 'ng2-dragula';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgZorroAntdModule } from "ng-zorro-antd";
-import { registerLocaleData } from '@angular/common';
-import zh from '@angular/common/locales/zh';
-registerLocaleData(zh);
-import { MatButtonModule } from "@angular/material/button";
-import { MatCardModule } from "@angular/material/card";
-import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
+
+
+//local
 import { MatListModule } from "@angular/material/list";
-import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { ContainerComponent } from "./container/container.component";
-import { ReactiveDirective } from "./reactive.directive";
-import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatCardModule } from "@angular/material/card"
 
 
-import { MButtonComponent } from "./cmps/m-button/m-button.component";
-import { MInputComponent } from "./cmps/m-input/m-input.component";
-import { MSlideComponent } from "./cmps/m-slide/m-slide.component";
+import { ReactiveDirective } from "./reactive.directive";
+import { InputDirective } from './cmps/input.directive';
+import { CardDirective } from "./cmps/card.directive";
+
+
+import { ContainerComponent } from "./container/container.component";
 import { CmpCardComponent } from "./cmps/cmp-card/cmp-card.component";
 import { CmpEditComponent } from "./cmp-edit/cmp-edit.component";
 import { CmpJsonComponent } from "./cmp-json/cmp-json.component";
 import { CmpPreviewComponent } from "./cmp-preview/cmp-preview.component";
-import { CardDirective } from "./cmps/card.directive";
-import { MDateComponent } from "./cmps/m-date/m-date.component";
-import { MSelectComponent } from './cmps/m-select/m-select.component';
+
+
 import { CmpInputAreaComponent } from './cmp-input-area/cmp-input-area.component';
 import { MHeadingComponent } from './cmps/m-heading/m-heading.component';
 import { MInfoComponent } from './cmps/m-info/m-info.component';
+import { MSlideComponent } from "./cmps/m-slide/m-slide.component"
 import { MLinkageSelectComponent } from './cmps/m-linkage-select/m-linkage-select.component';
-import { InputDirective } from './cmps/input.directive';
 import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
+import { MButtonComponent } from './cmps/m-button/m-button.component';
+import { MDateComponent } from "./cmps/m-date/m-date.component";
+import { MSelectComponent } from './cmps/m-select/m-select.component';
 @NgModule({
   declarations: [
     AppComponent,
     ContainerComponent,
     ReactiveDirective,
-    MButtonComponent,
-    MInputComponent,
-    MSlideComponent,
     CmpCardComponent,
     CmpEditComponent,
     CmpJsonComponent,
@@ -61,34 +59,27 @@ import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
     MInfoComponent,
     MLinkageSelectComponent,
     InputDirective,
-    MTextAreaComponent
+    MTextAreaComponent,
+    MButtonComponent,
+    MSlideComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DndModule,
     FormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatCardModule,
     MatSnackBarModule,
-    MatSlideToggleModule,
-    MatIconModule,
     MatListModule,
-    MatTabsModule,
     BrowserAnimationsModule,
-    MatDatepickerModule,
     MatGridListModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
+    MatCardModule,
     DragulaModule.forRoot()
   ],
   providers: [],
   entryComponents: [
     MButtonComponent,
-    MInputComponent,
-    MSlideComponent,
     MDateComponent,
     CmpJsonComponent,
     CmpPreviewComponent,
@@ -98,6 +89,7 @@ import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
     MHeadingComponent,
     MInfoComponent,
     MLinkageSelectComponent,
+    MSlideComponent,
     MTextAreaComponent
   ],
   bootstrap: [AppComponent]
