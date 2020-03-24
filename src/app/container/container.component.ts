@@ -55,6 +55,7 @@ export class ContainerComponent implements OnInit {
       type: cmp.type,
       attr: {
         id: cmp.id,
+        type: cmp.type,
         ...cmp.attr
       },
       //@ts-ignore

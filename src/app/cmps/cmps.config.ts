@@ -5,6 +5,8 @@ import { CmpCardComponent } from "./cmp-card/cmp-card.component"
 import { MDateComponent } from "./m-date/m-date.component"
 import { MSelectComponent } from "./m-select/m-select.component"
 import { MHeadingComponent } from "./m-heading/m-heading.component"
+import { MInfoComponent } from "./m-info/m-info.component"
+import { MLinkageSelectComponent } from "./m-linkage-select/m-linkage-select.component"
 let cmpConfig = [
   {
     content: {
@@ -59,7 +61,8 @@ let cmpConfig = [
         width: "100px",
         title: "你最喜欢的食物",
         placeholder: "默认placeholder",
-        lineProportion:"100%"
+        lineProportion:"100%",
+        configuable:true
       }
     },
     effectAllowed: "move",
@@ -83,29 +86,37 @@ let cmpConfig = [
     handle: false,
     title: "滑块选择器"
   },
-  // {
-  //   content: {
-  //     type: "antd-select",
-  //     component: MSelectComponent,
-  //     attr: {
-  //       width: "100px",
-  //       options: [
-  //         {
-  //           nzValue: "jack",
-  //           nzLabel: "姓名"
-  //         },
-  //         {
-  //           nzValue: "jack",
-  //           nzLabel: "姓别"
-  //         }
-  //       ]
-  //     }
-  //   },
-  //   effectAllowed: "move",
-  //   disable: false,
-  //   handle: false,
-  //   title: "选择器"
-  // }
+  {
+    content: {
+      type: "info",
+      component: MInfoComponent,
+      attr: {
+        title:"当前信息",
+        value:"neal",
+        lineProportion:"100%",
+        infotype:"time"//time company usertype
+      }
+    },
+    effectAllowed: "move",
+    disable: false,
+    handle: false,
+    title: "当前信息"
+  },
+  {
+    content: {
+      type: "linkage",
+      component: MLinkageSelectComponent,
+      attr: {
+        title:"单位组织",
+        lineProportion:"100%",
+        linkagetype:"company"//time company usertype
+      }
+    },
+    effectAllowed: "move",
+    disable: false,
+    handle: false,
+    title: "单位组织"
+  },
 ]
 
 export default cmpConfig

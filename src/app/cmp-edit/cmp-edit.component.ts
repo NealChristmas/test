@@ -55,8 +55,12 @@ export class CmpEditComponent implements OnInit {
       id:[],
       title:[],
       value:[],
-      lineProportion:[]
+      lineProportion:[],
+      infotype:[],
+      linkagetype:[],
+      configuable:[]
     });
+    
   }
   updateData(attr){
     this.attr = attr

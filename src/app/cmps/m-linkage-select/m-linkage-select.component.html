@@ -1,0 +1,20 @@
+<nz-form-item>
+  <nz-form-label [nzSm]="6" [nzMd]="4" [nzXs]="24" nzRequired>
+    <span>
+      {{ attr.title }}
+    </span>
+  </nz-form-label>
+  <nz-form-control
+    [nzSm]="6"
+    [nzXs]="24"
+    nzErrorTip="Please input your nickname!"
+  >
+    <nz-cascader
+      [nzOptions]="linkageOptions[attr.linkagetype]"
+      [(ngModel)]="values"
+      [nzShowSearch]="true"
+      (ngModelChange)="onChanges($event)"
+    >
+    </nz-cascader>
+  </nz-form-control>
+</nz-form-item>

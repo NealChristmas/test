@@ -10,6 +10,6 @@
     </span>
   </nz-form-label>
   <nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="Please input your nickname!">
-    <input nz-input id="nickname"/>
+    <input nz-input id="nickname" [(ngModel)]="attr.value"  #Input  />
   </nz-form-control>
 </nz-form-item>
