@@ -39,16 +39,20 @@
             <input matInput placeholder="字段名称" [(ngModel)]="attr.title" formControlName="title">
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item>
-          <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
-            <span>
-              字段值
-            </span>
-          </nz-form-label>
-          <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Please input your nickname!">
-            <input matInput placeholder="字段值" [(ngModel)]="attr.value" formControlName="value">
-          </nz-form-control>
-        </nz-form-item>
+        <ng-container  *ngIf="attr.type!='date' && attr.type!='linkage'">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
+              <span>
+                字段值
+              </span>
+            </nz-form-label>
+            <nz-form-control [nzSm]="15" [nzXs]="24" nzErrorTip="Please input your nickname!">
+              <input matInput placeholder="字段值" [(ngModel)]="attr.value" formControlName="value">
+            </nz-form-control>
+          </nz-form-item>
+        </ng-container>
+        
+        
         <nz-form-item>
           <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
             <span>
@@ -69,7 +73,7 @@
       </ng-container>
       <!-- 特有属性 -->
       <!-- 当前信息的类型选择 -->
-      <ng-container *ngIf="attr.type =='info'" >
+      <ng-container *ngIf="attr.type =='info' || attr.type=='area' " >
         <nz-form-item>
           <nz-form-label [nzSm]="8" [nzXs]="24" nzFor="nickname" nzRequired>
             <span>
@@ -84,6 +88,17 @@
               <nz-option nzValue="company" nzLabel="当前公司"></nz-option>
               <nz-option nzValue="usertype" nzLabel="当前用户"></nz-option>
             </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24"  nzRequired>
+            <span>
+              是否可编辑
+            </span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+            <!-- <input matInput placeholder="字段值" [(ngModel)]="attr.lineProportion" formControlName="lineProportion" > -->
+            <nz-switch [(ngModel)]="attr.configuable" formControlName="inputConfiguable" (ngModelChange)="cmpsService.notifyInput()"></nz-switch>
           </nz-form-control>
         </nz-form-item>
       </ng-container>
@@ -116,7 +131,21 @@
           </nz-form-label>
           <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
             <!-- <input matInput placeholder="字段值" [(ngModel)]="attr.lineProportion" formControlName="lineProportion" > -->
-            <nz-switch [(ngModel)]="attr.configuable" formControlName="configuable"></nz-switch>
+            <nz-switch [(ngModel)]="attr.configuable" formControlName="inputConfiguable" (ngModelChange)="cmpsService.notifyInput()"></nz-switch>
+          </nz-form-control>
+        </nz-form-item>
+      </ng-container>
+       <!-- 时间选择是否可编辑 -->
+      <ng-container *ngIf="attr.type =='date'" >
+        <nz-form-item>
+          <nz-form-label [nzSm]="8" [nzXs]="24"  nzRequired>
+            <span>
+              是否可编辑
+            </span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+            <!-- <input matInput placeholder="字段值" [(ngModel)]="attr.lineProportion" formControlName="lineProportion" > -->
+            <nz-switch [(ngModel)]="attr.configuable" formControlName="dateConfiguable"></nz-switch>
           </nz-form-control>
         </nz-form-item>
       </ng-container>

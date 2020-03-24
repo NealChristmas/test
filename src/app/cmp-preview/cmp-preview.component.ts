@@ -41,10 +41,10 @@ export class CmpPreviewComponent implements OnInit {
       let cmpItem
       this.JsonConfig.forEach((item,index,self)=>{
         cmpConfig.forEach(element=>{
-          if(item.type === element.content.type){
+          if(item.attr.type === element.content.type){
             cmpItem = item 
             if(!cmpItem.cmpClass){
-              cmpItem.cmpClass = element.content.component
+              cmpItem.cmpClass = element.content.cmpClass
             }
             res.push(cmpItem)
           }

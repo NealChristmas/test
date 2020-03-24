@@ -28,6 +28,14 @@ export class ContainerComponent implements OnInit {
     private dragulaService: DragulaService,
   ) {
     this.cardsInstances = this.reactiveContainerService.cardsInstances
+    this.reactiveContainerService.addcmp.subscribe((cmp) => {
+      this.loadComponent(cmp)
+    })
+    this.reactiveContainerService.deletecmp.subscribe((viewRef) => {
+      this.deleteComponent(viewRef)
+    })
+    this.reactiveContainerService.reload.subscribe(()=>this.clearViewContainer())
+
     this.subs.add(this.dragulaService.dropModel("CARD")
       .subscribe((item) => {
 
@@ -36,13 +44,7 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reactiveContainerService.addcmp.subscribe((cmp) => {
-      this.loadComponent(cmp)
-    })
-    this.reactiveContainerService.deletecmp.subscribe((viewRef) => {
-      this.deleteComponent(viewRef)
-    })
-
+   
   }
 
   loadComponent(cmp) {
@@ -51,20 +53,18 @@ export class ContainerComponent implements OnInit {
     const componentRef = viewContainerRef.createComponent(componentFactory);
     //@ts-ignore
     componentRef.instance.data = {
-      id: cmp.id,
-      type: cmp.type,
-      attr: {
-        id: cmp.id,
-        type: cmp.type,
-        ...cmp.attr
-      },
+      attr: cmp.attr,
       //@ts-ignore
       viewRef: componentRef._viewRef,
-      cmpClass: cmp.component
+      cmpClass: cmp.cmpClass
     }
     
     this.reactiveContainerService.cardsInstances.push(componentRef.instance)
   }
+  clearViewContainer(){
+    this.viewContainerRef.clear()
+  }
+  
   //删除组件
   deleteComponent(cmpData) {
     let viewIndex = this.viewContainerRef.indexOf(cmpData.viewRef)

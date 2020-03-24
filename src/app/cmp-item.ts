@@ -1,7 +1,7 @@
 import { Type } from '@angular/core';
 
 export class CmpItem {
-  constructor(public component: Type<any>,public id:string) {}
+  constructor(public  cmpClass: Type<any>,public id:string) {}
 }
 
 

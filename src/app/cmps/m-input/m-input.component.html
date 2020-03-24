@@ -1,15 +1,11 @@
-<!-- <form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput [placeholder]="attr.title" [value]="attr.placeholder">
-  </mat-form-field>
-</form> -->
-<nz-form-item>
-  <nz-form-label [nzSm]="6"  [nzMd]="4" [nzXs]="24" nzFor="nickname" nzRequired>
+
+<nz-form-item  [nzFlex] = "true">
+  <nz-form-label nzFor="nickname" nzRequired>
     <span>
         {{attr.title}}
     </span>
   </nz-form-label>
-  <nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="Please input your nickname!">
-    <input nz-input id="nickname" [(ngModel)]="attr.value"  #Input  />
+  <nz-form-control  nzErrorTip="Please input your nickname!">
+    <input nz-input id="nickname" [(ngModel)]="attr.value"  #Input  [appInput] = 'attr' />
   </nz-form-control>
 </nz-form-item>

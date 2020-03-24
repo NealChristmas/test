@@ -22,6 +22,7 @@
     outline: 1px solid #409EFF;
     outline-offset: 0px;
 }
+
 .cmp-card{
     margin:2px auto;
     min-height: 40px;
@@ -46,6 +47,12 @@
     .active{
         outline: 2px solid #409EFF;
         border: 1px solid #409EFF;
+    }
+    .ant-form-item-label{
+        width: 130px;
+    }
+    .ant-form-item-control-wrapper{
+        flex-grow: 1;
     }
 }
 .ant-modal{

@@ -231,7 +231,6 @@ export class MLinkageSelectComponent implements OnInit {
   }
 
   onChanges(values: string[]): void {
-    console.log(values, this.values);
   }
 
 }

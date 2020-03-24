@@ -1,4 +1,4 @@
-import { Component, OnInit , EventEmitter ,Output,ViewChild ,ComponentFactoryResolver,Input,Renderer2} from '@angular/core';
+import { Component, OnInit , EventEmitter ,Output,ViewChild ,ComponentFactoryResolver,Input,Renderer2,ViewEncapsulation } from '@angular/core';
 import { ReactiveContainerService } from "../../reactive-container.service"
 import { CardDirective } from "../card.directive"
 import { MButtonComponent } from "../m-button/m-button.component"
@@ -6,7 +6,7 @@ import { DndDropEvent } from 'ngx-drag-drop';
 @Component({
   selector: 'app-cmp-card',
   templateUrl: './cmp-card.component.html',
-  styleUrls: ['./cmp-card.component.scss']
+  styleUrls: ['./cmp-card.component.scss'],
 })
 export class CmpCardComponent implements OnInit {
   @ViewChild(CardDirective, {static: true}) cardReactive: CardDirective;
@@ -54,7 +54,6 @@ export class CmpCardComponent implements OnInit {
       }
      
     })
-    console.log(this.data.attr.lineProportion)
     //@ts-ignore
     componentRef.instance.attr = this.data.attr
     let config = Object.assign({},this.data)

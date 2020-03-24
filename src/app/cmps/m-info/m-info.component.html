@@ -1,10 +1,10 @@
-<nz-form-item>
-    <nz-form-label [nzSm]="6"  [nzMd]="4" [nzXs]="24" nzRequired>
+<nz-form-item [nzFlex] = "true">
+    <nz-form-label  nzRequired>
       <span>
           {{attr.title}}
       </span>
     </nz-form-label>
-    <nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="Please input your nickname!">
-      <input nz-input [(ngModel)]="userdata[attr.infotype]"/>
+    <nz-form-control  nzErrorTip="Please input your nickname!">
+      <input nz-input [(ngModel)]="userdata[attr.infotype]" [appInput] = 'attr' />
     </nz-form-control>
   </nz-form-item>

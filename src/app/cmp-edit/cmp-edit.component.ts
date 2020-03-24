@@ -1,13 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ReactiveContainerService } from "../reactive-container.service"
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CmpsService } from "../cmps/cmps.service"
 @Component({
   selector: 'app-cmp-edit',
   templateUrl: './cmp-edit.component.html',
   styleUrls: ['./cmp-edit.component.scss']
 })
 export class CmpEditComponent implements OnInit {
-  attr:any
+  attr: any
   validateForm: FormGroup;
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -34,14 +35,20 @@ export class CmpEditComponent implements OnInit {
     e.preventDefault();
   }
   constructor(
-    public reactiveContainerService:ReactiveContainerService,
-    private fb: FormBuilder
-  ) { }
-
-  ngOnInit() {
-    this.reactiveContainerService.updateData.subscribe(attr=>{
+    public reactiveContainerService: ReactiveContainerService,
+    private fb: FormBuilder,
+    public cmpsService: CmpsService
+  ) {
+    this.reactiveContainerService.updateData.subscribe(attr => {
       this.updateData(attr)
     })
+    this.reactiveContainerService.addcmp.subscribe(cmp=>{
+      this.updateData(cmp.attr)
+    })
+  }
+
+  ngOnInit() {
+
     this.validateForm = this.fb.group({
       // email: [null, [Validators.email, Validators.required]],
       // password: [null, [Validators.required]],
@@ -52,20 +59,19 @@ export class CmpEditComponent implements OnInit {
       // website: [null, [Validators.required]],
       // captcha: [null, [Validators.required]],
       agree: [false],
-      id:[],
-      title:[],
-      value:[],
-      lineProportion:[],
-      infotype:[],
-      linkagetype:[],
-      configuable:[]
+      id: [],
+      title: [],
+      value: [],
+      lineProportion: [],
+      infotype: [],
+      linkagetype: [],
+      inputConfiguable: [],
+      dateConfiguable : []
     });
-    
+
   }
-  updateData(attr){
+  updateData(attr) {
     this.attr = attr
-    // this.data = this.reactiveContainerService.selectCmpInstance && this.reactiveContainerService.selectCmpInstance.data
-    // this.id = this.reactiveContainerService.selectCmpInstance&&this.reactiveContainerService.selectCmpInstance.id
   }
 
 }

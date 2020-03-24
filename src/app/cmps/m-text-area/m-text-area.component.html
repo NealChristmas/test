@@ -1,0 +1,9 @@
+
+<nz-form-item  [nzFlex] = "true">
+    <nz-form-label nzFor="nickname" nzRequired>
+      <span>
+          {{attr.title}}
+      </span>
+    </nz-form-label>
+    <textarea name="" id="" cols="3"  class="text-area" [(ngModel)]="attr.value" [appInput] = 'attr'></textarea>
+  </nz-form-item>

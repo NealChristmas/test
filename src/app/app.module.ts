@@ -39,6 +39,8 @@ import { CmpInputAreaComponent } from './cmp-input-area/cmp-input-area.component
 import { MHeadingComponent } from './cmps/m-heading/m-heading.component';
 import { MInfoComponent } from './cmps/m-info/m-info.component';
 import { MLinkageSelectComponent } from './cmps/m-linkage-select/m-linkage-select.component';
+import { InputDirective } from './cmps/input.directive';
+import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,9 @@ import { MLinkageSelectComponent } from './cmps/m-linkage-select/m-linkage-selec
     CmpInputAreaComponent,
     MHeadingComponent,
     MInfoComponent,
-    MLinkageSelectComponent
+    MLinkageSelectComponent,
+    InputDirective,
+    MTextAreaComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +97,8 @@ import { MLinkageSelectComponent } from './cmps/m-linkage-select/m-linkage-selec
     CmpInputAreaComponent,
     MHeadingComponent,
     MInfoComponent,
-    MLinkageSelectComponent
+    MLinkageSelectComponent,
+    MTextAreaComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,11 +1,11 @@
 
-<nz-form-item>
-    <nz-form-label [nzSm]="6"  [nzMd]="4" [nzXs]="24" nzFor="datepicker" nzRequired>
+<nz-form-item  [nzFlex] = "true">
+    <nz-form-label  nzFor="datepicker" nzRequired>
       <span>
           {{attr.title}}
       </span>
     </nz-form-label>
-    <nz-form-control [nzSm]="6" [nzXs]="24" nzErrorTip="Please input your nickname!">
-      <nz-date-picker nzSize="default" id="datepicker"></nz-date-picker>
+    <nz-form-control  nzErrorTip="Please input your nickname!">
+      <nz-date-picker nzSize="default" id="datepicker" [(ngModel)]="attr.value"  [nzDisabled] = "!attr.configuable"></nz-date-picker>
     </nz-form-control>
   </nz-form-item>

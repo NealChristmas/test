@@ -35,9 +35,11 @@ export class CmpInputAreaComponent implements OnInit {
         },
         nzFooter: [
           {
-            label: 'change component title from outside',
+            label: '确定',
             onClick: componentInstance => {
-              componentInstance!.title = 'title in inner component is changed';
+              this.reactiveContainerService.reLoadContainer(parsedJsonData)
+              componentInstance.destroyModal()
+              this.modal.destroy()
             }
           }
         ]
