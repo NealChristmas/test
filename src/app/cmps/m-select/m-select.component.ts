@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-m-select',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./m-select.component.scss']
 })
 export class MSelectComponent implements OnInit {
-
+  @Input() attr
   constructor() { }
 
   ngOnInit() {
+    this.attr.value = this.attr.options[0].value
   }
 
 }

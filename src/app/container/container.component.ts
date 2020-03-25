@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy ,ElementRef,Renderer2 } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
 import { ReactiveDirective } from "../reactive.directive"
 import { ReactiveContainerService } from "../reactive-container.service"
@@ -19,22 +19,29 @@ export class ContainerComponent implements OnInit {
   subs = new Subscription();
   currentAdIndex = -1;
   @ViewChild(ReactiveDirective, { static: true }) cmpReactive: ReactiveDirective;
+  @ViewChild("cmpcontainer",{read:ElementRef,static:false}) cmpcontainer:ElementRef
   interval: any;
   viewContainerRef: any
+  isReload:boolean = false
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     public reactiveContainerService: ReactiveContainerService,
     private modalService: NzModalService,
     private dragulaService: DragulaService,
+    private rd:Renderer2
   ) {
     this.cardsInstances = this.reactiveContainerService.cardsInstances
     this.reactiveContainerService.addcmp.subscribe((cmp) => {
+      this.isReload = false
       this.loadComponent(cmp)
     })
     this.reactiveContainerService.deletecmp.subscribe((viewRef) => {
       this.deleteComponent(viewRef)
     })
-    this.reactiveContainerService.reload.subscribe(()=>this.clearViewContainer())
+    this.reactiveContainerService.reload.subscribe(()=>{
+      this.isReload = true
+      this.clearViewContainer()
+    })
 
     this.subs.add(this.dragulaService.dropModel("CARD")
       .subscribe((item) => {
@@ -45,6 +52,12 @@ export class ContainerComponent implements OnInit {
 
   ngOnInit() {
    
+  }
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    let parentNode = this.rd.parentNode(this.cmpcontainer.nativeElement)
+    this.rd.setStyle(parentNode,"width","100%")
   }
 
   loadComponent(cmp) {
@@ -58,6 +71,7 @@ export class ContainerComponent implements OnInit {
       viewRef: componentRef._viewRef,
       cmpClass: cmp.cmpClass
     }
+    componentRef.instance.isReload = this.isReload
     
     this.reactiveContainerService.cardsInstances.push(componentRef.instance)
   }
@@ -75,7 +89,7 @@ export class ContainerComponent implements OnInit {
       }
     })
     this.reactiveContainerService.cmpJsonConfig.forEach((config,index,self)=>{
-      if(config.attr.id === cmpData.id){
+      if(config.attr.id === cmpData.attr.id){
         self.splice(index, 1)
       }
     })
@@ -101,6 +115,7 @@ export class ContainerComponent implements OnInit {
   }
   //生成组件预览
   createPreviewModal(): void {
+    console.log(this.reactiveContainerService.cmpJsonConfig)
     const modal = this.modalService.create({
       nzTitle: 'Modal Title',
       nzContent: CmpPreviewComponent,

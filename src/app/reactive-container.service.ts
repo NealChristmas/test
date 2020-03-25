@@ -53,8 +53,8 @@ export class ReactiveContainerService {
     this.cmpJsonConfig.push(config)
   }
   reLoadContainer(configs){
-    this.cmpJsonConfig = configs
     this.reload.emit()
+    this.cmpJsonConfig = configs
     setTimeout(()=>{
       this.cmpJsonConfig.forEach(config=>{
         this.addcmp.emit(config)

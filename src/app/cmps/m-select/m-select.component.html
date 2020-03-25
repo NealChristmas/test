@@ -1,1 +1,21 @@
-<p>m-select works!</p>
+<nz-form-item [nzFlex]="true" class="upload">
+  <nz-form-label nzFor="nickname" nzRequired [nzSm]="4">
+    <span>
+      {{ attr.title }}
+    </span>
+  </nz-form-label>
+  <nz-select
+    nzShowSearch
+    nzAllowClear
+    [ngModel]="attr.value"
+    [nzDropdownRender]="render"
+    *ngIf="attr.options"
+    [nzPlaceHolder]="attr.placeholder"
+  >
+    <nz-option *ngFor="let item of attr.options" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+  </nz-select>
+  <ng-template #render>
+    <!-- <nz-divider></nz-divider>
+    <div class="add-item" (click) = "addItem"><i nz-icon nzType="plus"></i> Add item</div> -->
+  </ng-template>
+</nz-form-item>

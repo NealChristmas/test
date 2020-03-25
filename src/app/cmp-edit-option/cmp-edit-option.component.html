@@ -1,0 +1,41 @@
+ <button nz-button (click)="addRow()" nzType="primary">添加</button>
+ <nz-table #editRowTable nzBordered [nzData]="listOfData">
+    <thead>
+      <tr>
+        <th nzWidth="25%">标签</th>
+        <th nzWidth="15%">值</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit; else nameInputTpl">
+            {{ data.label }}
+          </ng-container>
+          <ng-template #nameInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.label" />
+          </ng-template>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit; else ageInputTpl">
+            {{ data.value }}
+          </ng-container>
+          <ng-template #ageInputTpl>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.value" />
+          </ng-template>
+        </td>
+        <td>
+          <div class="editable-row-operations">
+            <ng-container *ngIf="!editCache[data.id].edit; else saveTpl">
+              <a (click)="startEdit(data.id)">编辑</a>
+            </ng-container>
+            <ng-template #saveTpl>
+              <a (click)="saveEdit(data.id)">保存</a>
+              <a nz-popconfirm nzTitle="确定保存?" (nzOnConfirm)="cancelEdit(data.id)">取消</a>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

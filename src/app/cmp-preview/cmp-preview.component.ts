@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy ,Renderer2} from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy ,Renderer2 , ViewEncapsulation} from '@angular/core';
 import { ReactiveDirective } from "../reactive.directive"
 import { ReactiveContainerService } from "../reactive-container.service"
 import  cmpConfig  from "../cmps/cmps.config"
@@ -6,7 +6,8 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal'
 @Component({
   selector: 'app-cmp-preview',
   templateUrl: './cmp-preview.component.html',
-  styleUrls: ['./cmp-preview.component.scss']
+  styleUrls: ['./cmp-preview.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class CmpPreviewComponent implements OnInit {
   @ViewChild(ReactiveDirective, {static: true}) cmpReactive: ReactiveDirective;

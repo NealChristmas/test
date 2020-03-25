@@ -7,10 +7,12 @@ import { DndDropEvent } from 'ngx-drag-drop';
   selector: 'app-cmp-card',
   templateUrl: './cmp-card.component.html',
   styleUrls: ['./cmp-card.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class CmpCardComponent implements OnInit {
   @ViewChild(CardDirective, {static: true}) cardReactive: CardDirective;
   @Input() data:any
+  @Input() isReload:boolean  = false
   public isActive:boolean = false
   public viewContainerRef:any
   public width:string
@@ -59,6 +61,9 @@ export class CmpCardComponent implements OnInit {
     let config = Object.assign({},this.data)
     delete config.id
     delete config.viewRef
-    this.reactiveContainerService.pushToCmpJsonConfig(config)
+    if(!this.isReload){
+      this.reactiveContainerService.pushToCmpJsonConfig(config)
+    }
+    
   }
 }

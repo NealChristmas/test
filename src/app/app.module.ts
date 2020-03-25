@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule  } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http"
 import { FormsModule, ReactiveFormsModule, MinLengthValidator } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -41,6 +42,8 @@ import { MInfoComponent } from './cmps/m-info/m-info.component';
 import { MLinkageSelectComponent } from './cmps/m-linkage-select/m-linkage-select.component';
 import { InputDirective } from './cmps/input.directive';
 import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
+import { MUploadComponent } from './cmps/m-upload/m-upload.component';
+import { CmpEditOptionComponent } from './cmp-edit-option/cmp-edit-option.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +64,9 @@ import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
     MInfoComponent,
     MLinkageSelectComponent,
     InputDirective,
-    MTextAreaComponent
+    MTextAreaComponent,
+    MUploadComponent,
+    CmpEditOptionComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +87,8 @@ import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
     MatGridListModule,
     NgZorroAntdModule,
     ReactiveFormsModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    HttpClientModule 
   ],
   providers: [],
   entryComponents: [
@@ -98,7 +104,9 @@ import { MTextAreaComponent } from './cmps/m-text-area/m-text-area.component';
     MHeadingComponent,
     MInfoComponent,
     MLinkageSelectComponent,
-    MTextAreaComponent
+    MTextAreaComponent,
+    MUploadComponent,
+    CmpEditOptionComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,15 @@
+<nz-form-item [nzFlex]="true" class="upload">
+  <nz-form-label nzFor="nickname" nzRequired [nzSm]="4">
+    <span>
+      {{ attr.title }}
+    </span>
+  </nz-form-label>
+  <nz-upload
+    nzAction="https://jsonplaceholder.typicode.com/posts/"
+    [nzFileList]="fileList"
+  >
+    <button nz-button>
+      <i nz-icon nzType="upload"></i><span>{{ attr.title }}</span>
+    </button>
+  </nz-upload>
+</nz-form-item>
